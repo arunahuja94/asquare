@@ -44,6 +44,7 @@ Once you're up and running with asquare
 
 ## TO-Do List
 
+- Detect Jailbreak
 - Code refactoring
 - Theme Support
 - Push / in-app Notifications
