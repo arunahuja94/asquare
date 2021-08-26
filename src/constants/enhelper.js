@@ -14,4 +14,4 @@ export const encryptData = (text, key) => {
 };
 export const generateKey = (password, salt, cost, length) => Aes.pbkdf2(password, salt, cost, length);
 export const decryptData = (encryptedData, key) => Aes.decrypt(encryptedData.data, key, encryptedData.iv);
-export const ensalt = generateRandomKey();
+export const ensalt = 'salt'; //generateRandomKey()

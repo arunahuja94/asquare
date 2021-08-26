@@ -16,7 +16,6 @@ function SignUpScreen() {
   const { signIn, signUp } = React.useContext(AuthContext);
   const [secondTextInput, secondTextInputUpdate] = React.useState('');
   useEffect(() => {
-
     // Specify how to clean up after this effect:
     return function cleanup() {
     };
@@ -58,6 +57,7 @@ function SignUpScreen() {
      {({ handleChange, handleBlur, handleSubmit, values }) => (
        <View>
          <TextInput
+         keyboardType="numeric"
           placeholder="Master password"
            placeholderTextColor="#fff"
            onChangeText={handleChange('password')}
@@ -69,6 +69,7 @@ function SignUpScreen() {
            onSubmitEditing={() => { secondTextInput.focus(); }}
          />
            <TextInput
+           keyboardType="numeric"
           ref={(input) => { secondTextInputUpdate(input); }}
           placeholder="Confirm Master password"
            placeholderTextColor="#fff"

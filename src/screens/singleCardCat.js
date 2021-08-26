@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {View, Text,StyleSheet,Dimensions} from 'react-native'
 import {TextInput,TouchableOpacity,FlatList} from 'react-native-gesture-handler'
 import Icon from '../components/icons';
-import { CardView } from "react-native-credit-card-input";
+import { CardView } from "react-native-credit-card-input-view";
 const windowWidth = Dimensions.get('window').width;
 import {FocusAwareStatusBar} from '../constants/helper';
 const singleCardCat = props => {

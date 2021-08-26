@@ -50,92 +50,6 @@ export const cardSchema = {
   // encryptionKey: key,
 };
 
-// export const TokenSchema = {
-//   name: 'usertoken',
-//   primaryKey: 'id',
-//   properties: {
-//     id: 'int',
-//     token: 'string',
-//     added_date: 'int',
-//   },
-//   schemaVersion: 1,
-//   deleteRealmIfMigrationNeeded: 1,
-//   encryptionKey: key,
-// };
-
-// export const getTokenData = () => {
-//   return new Promise(function(resolve, reject) {
-//     Realm.open({
-//       schema: [TokenSchema],
-//       encryptionKey: key,
-//     })
-//       .then(realm => {
-//         // pupulate with a secure key
-//         const singletoken = realm.objects('usertoken').sorted('token');
-//         let sToken = Array.from(singletoken);
-//         console.log(JSON.stringify(sToken));
-//         resolve(JSON.parse(JSON.stringify(sToken)));
-//         realm.close();
-//       })
-//       .catch(error => {
-//         console.log(error);
-//         reject(error);
-//       });
-//   });
-// };
-
-// export const createToken = token => {
-//   return new Promise((resolve, reject) => {
-//     Realm.open({
-//       schema: [TokenSchema],
-//       encryptionKey: key,
-//     })
-//       .then(realm => {
-//         realm.write(() => {
-//           let data = realm.create(
-//             'usertoken',
-//             {
-//               id: moment.utc().valueOf(),
-//               token: token,
-//               added_date: moment.utc().valueOf(),
-//             },
-//             true,
-//           );
-//           // console.log('data 1', data);
-//          //realm.close();
-//           resolve('DONE');
-//           // }
-//           console.log('CREATE token');
-//         });
-//         // resolve('DONE');
-//       })
-//       .catch(error => {
-//         console.log('error', error);
-//         reject(error);
-//       });
-//   });
-// };
-
-// export const deleteAllTokenData = () => {
-//   return new Promise((resolve, reject) => {
-//     Realm.open({
-//       schema: [TokenSchema],
-//       encryptionKey: key,
-//     })
-//       .then(realm => {
-//         realm.write(() => {
-//           realm.deleteAll();
-//           realm.close();
-//           resolve('DONE');
-//         });
-//       })
-//       .catch(error => {
-//         console.log(error);
-//         reject(error);
-//       });
-//   });
-// };
-
 export const getAllData = (key) => {
   return new Promise(function (resolve, reject) {
     Realm.open({
@@ -150,7 +64,6 @@ export const getAllData = (key) => {
         ]);
         let pass = Array.from(allPasswords);
         //.slice(0, 5)
-        //console.log(JSON.parse(JSON.stringify(pass)));
         resolve(JSON.parse(JSON.stringify(pass)));
         realm.close();
       })
@@ -184,10 +97,6 @@ export const getAllExportData = (key) => {
         if (allExportcdata.length > 0) {
           allData['cards'] = allExportcdata;
         }
-        //let allPData = Array.from(allExportpdata);
-        //let allCData = Array.from(allExportcdata);
-        //.slice(0, 5)
-        console.log(allExportpdata.length, 'checklen');
         resolve(JSON.parse(JSON.stringify(allData)));
         realm.close();
       })
@@ -212,7 +121,7 @@ export const getAllcardData = (key) => {
         ]);
         let Card = Array.from(allCards);
         //.slice(0, 5)
-        //console.log(JSON.parse(JSON.stringify(pass)));
+ 
         resolve(JSON.parse(JSON.stringify(Card)));
         realm.close();
       })
@@ -245,14 +154,74 @@ export const createDataNew = (item, passwordType, key) => {
             },
             true,
           );
-          // console.log('data 1', data);
-
+ 
           // realm.close();
           resolve('DONE');
-          // }
+ 
           console.log('CREATE createDataNew data', data);
         });
-        // resolve('DONE');
+ 
+      })
+      .catch((error) => {
+        console.log('error', error);
+        reject(error);
+      });
+  });
+};
+
+export const insertAllData = (data, key) => {
+  return new Promise((resolve, reject) => {
+    Realm.open({
+      schema: [cardSchema, PasswordSchema],
+      encryptionKey: key,
+    })
+      .then((realm) => {
+        realm.write(() => {
+          data = JSON.parse(data);
+
+          if (Object.keys(data).length > 0) {
+            Object.keys(data).map(function (x) {
+              if (x == 'cards') {
+                data['cards'].map(function (item) {
+                  realm.create(
+                    'Card',
+                    {
+                      id: moment.utc().valueOf(),
+                      cvc: item.cvc,
+                      expiry: item.expiry,
+                      name: item.name,
+                      number: item.number.replace(/\s/g, ''),
+                      postalCode: item.postalCode,
+                      cdtype: item.cdtype,
+                      type: parseInt(item.type),
+                      lastUpdatedDate: moment.utc().valueOf(),
+                    },
+                    true,
+                  );
+                });
+              } else if (x == 'passwords') {
+                data['passwords'].map(function (item) {
+                  realm.create(
+                    'Passwords',
+                    {
+                      id: moment.utc().valueOf(),
+                      name: item.name,
+                      website: item.website || '',
+                      login: item.login,
+                      password: item.password,
+                      note: item.note || '',
+                      type: parseInt(item.type),
+                      lastUpdatedDate: moment.utc().valueOf(),
+                    },
+                    true,
+                  );
+                });
+              }
+            });
+          }
+          resolve('DONE');
+        });
+        realm.close();
       })
       .catch((error) => {
         console.log('error', error);
@@ -284,14 +253,9 @@ export const addcardData = (item, cardType, key) => {
             },
             true,
           );
-          // console.log('data 1', data);
-
-          // realm.close();
           resolve('DONE');
-          // }
           console.log('CREATE cardDataNew data', data);
         });
-        // resolve('DONE');
       })
       .catch((error) => {
         console.log('error', error);
@@ -337,13 +301,10 @@ export const EditDataNew = (item, id, passwordType, key) => {
       encryptionKey: key,
     })
       .then((realm) => {
-        console.log('itemitemitemitemitem', item);
-        console.log('itemitemitemitemitem', id);
         realm.write(() => {
           const passwordEdit = realm
             .objects('Passwords')
             .filtered('id = ' + id);
-          console.log('itemitemitemitemitem 3', passwordEdit[0]);
           passwordEdit[0].name = item.name;
           passwordEdit[0].website = item.webAddress;
           passwordEdit[0].login = item.login;
@@ -361,18 +322,18 @@ export const EditDataNew = (item, id, passwordType, key) => {
   });
 };
 
-export const deleteAllData = () => {
+export const deleteAllData = (key) => {
   return new Promise((resolve, reject) => {
     Realm.open({
-      schema: [PasswordSchema],
+      schema: [PasswordSchema, cardSchema],
       encryptionKey: key,
     })
       .then((realm) => {
         realm.write(() => {
           realm.deleteAll();
-          realm.close();
           resolve('DONE');
         });
+        realm.close();
       })
       .catch((error) => {
         console.log(error);
@@ -389,44 +350,35 @@ export const deletecardData = (id, key) => {
       .then((realm) => {
         realm.write(() => {
           const cardSelect = realm.objects('Card').filtered('id = ' + id);
-          console.log('cardSelect', cardSelect);
           realm.delete(cardSelect);
           // realm.close();
           resolve('DONE');
         });
       })
       .catch((error) => {
-        console.log('error=====', error);
         reject(error);
       });
   });
 };
 export const deleteData = (id, key) => {
-  console.log('1o11919=====');
   return new Promise((resolve, reject) => {
-    console.log('1o11919=1====');
-
     Realm.open({
       schema: [PasswordSchema],
       encryptionKey: key,
     })
       .then((realm) => {
-        console.log('1o11919=13====');
-
+ 
         realm.write(() => {
-          console.log('1o11919=133====');
-
+ 
           const passwordSelect = realm
             .objects('Passwords')
             .filtered('id = ' + id);
-          console.log('passwordSelectpasswordSelect', passwordSelect);
-          realm.delete(passwordSelect);
-          // realm.close();
+           realm.delete(passwordSelect);
           resolve('DONE');
         });
+       // realm.close();
       })
       .catch((error) => {
-        console.log('error=====', error);
         reject(error);
       });
   });

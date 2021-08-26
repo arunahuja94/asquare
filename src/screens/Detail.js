@@ -7,12 +7,13 @@ import {
   TouchableOpacity,
   SectionList,
   FlatList,
+  Pressable
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {getAllData, retrieveUserSession} from './../db/operations';
-import {Ripple, Center} from './Center';
+import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from '../components/icons';
-import {FocusAwareStatusBar} from '../constants/helper';
+import {FocusAwareStatusBar,globalToast} from '../constants/helper';
 const Detail = ({navigation}) => {
   const [passwords, SetPasswords] = useState([]);
   const [hasData, sethasData] = useState(false);
@@ -259,7 +260,7 @@ const Detail = ({navigation}) => {
                     horizontal
                     data={section.data}
                     renderItem={({item}) => (
-                      <TouchableOpacity
+                      <Pressable
                         key={item.id}
                         onPress={() =>
                           navigation.navigate('HelloForm', {
@@ -267,6 +268,12 @@ const Detail = ({navigation}) => {
                             createFlag: 0,
                           })
                         }
+                        onLongPress={() =>{
+                          Clipboard.setString(item.password);
+                          globalToast('Password copied to Clipboard');
+                        }
+                        }
+                        android_ripple={{color: '#F9F9F9'}}
                         style={styles.passwordList}>
                         <View
                           style={{
@@ -278,17 +285,17 @@ const Detail = ({navigation}) => {
                             style={{
                               fontWeight: 'bold',
                             }}>
-                            {item.name.length > 18
-                              ? item.name.substring(0, 18) + '...'
+                            {item.name.length > 16
+                              ? item.name.substring(0, 16) + '...'
                               : item.name}
                           </Text>
                         </View>
                         <Text style={styles.passwordSectext}>
-                          {item.website.length > 18
-                            ? item.website.substring(0, 18) + '...'
+                          {item.website.length > 16
+                            ? item.website.substring(0, 16) + '...'
                             : item.website}
                         </Text>
-                      </TouchableOpacity>
+                      </Pressable>
                     )}
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={(item, index) => index.toString()}

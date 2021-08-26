@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";
 import { StyleSheet, View , TouchableOpacity,ScrollView, Text,Alert} from "react-native";
 import Icon from '../components/icons';
-import { CreditCardInput } from "react-native-credit-card-input";
+import { CreditCardInput } from "react-native-credit-card-input-view";
 import {FocusAwareStatusBar, globalToast} from '../constants/helper';
 import {
   addcardData,

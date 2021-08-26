@@ -20,10 +20,11 @@ import importExport from '../screens/importExport';
 import {DrawerContent} from '../components/DrawerContent';
 import {generateKey,ensalt} from '../constants/enhelper';
 import {globalToast,AuthContext} from '../constants/helper';
-
+import SplashScreen from  "react-native-splash-screen";
+import helpAbout from '../screens/helpAbout';
 const windowHeight = Dimensions.get('window').height;
 
-function SplashScreen() {
+function SplashS() {
   return (
     <View
       style={{
@@ -140,6 +141,7 @@ const DrawerScreen = () => (
     <Drawer.Screen name="password" component={passwordStackNavigator} />
     <Drawer.Screen name="cards" component={creditcardStackNavigator} />
     <Drawer.Screen name="importExport" component={importExport} />
+    <Drawer.Screen name="helpAbout" component={helpAbout} />
   </Drawer.Navigator>
 );
 
@@ -190,6 +192,7 @@ function MainStackNavigator() {
 
   useEffect(() => {
     AppState.addEventListener('change', _handleAppStateChange);
+    SplashScreen.hide();
 
     return () => {
       AppState.removeEventListener('change', _handleAppStateChange);
@@ -299,16 +302,17 @@ function MainStackNavigator() {
             headerBackTitleVisible: false,
           }}
           headerMode="float">
-          {state.isLoading ? (
+            {/* state.isLoading ? (
             // We haven't finished checking for the token yet
             <Stack.Screen
               name="Splash"
-              component={SplashScreen}
+              component={SplashS}
               options={{
                 headerShown: false,
               }}
             />
-          ) : state.userReg != null ? (
+          ) : */}
+          { state.userReg != null ? (
             state.userToken != null ? (
               <>
                 <Stack.Screen

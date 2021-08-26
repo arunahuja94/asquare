@@ -95,6 +95,7 @@ function SignInScreen() {
             {({handleChange, handleBlur, handleSubmit, values}) => (
               <View>
                 <TextInput
+                keyboardType="numeric"
                   placeholder="Master password"
                   placeholderTextColor="#fff"
                   onChangeText={handleChange('password')}
