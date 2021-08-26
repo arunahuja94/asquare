@@ -8,7 +8,7 @@
 <!-- Header -->
 
 <p align="center">
-  <b>Asquare is a Password Manager Application build in react native</b>
+  <b>Asquare is a Password Manager Application build in react native with Realm as local database</b>
   <br />
 <!-- 
   <p align="center">
