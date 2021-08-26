@@ -10,11 +10,11 @@
 <p align="center">
   <b>Asquare is a Password Manager Application build in react native with Realm as local database</b>
   <br />
-<!-- 
+
   <p align="center">
-    <a href="https://arunahuja94.github.io/requestman/"> <img alt="Web Application" longdesc="Requestman - Web Application" src="https://img.shields.io/badge/web-000.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" /></a>
-     <img alt="Web Application" src="https://img.shields.io/badge/Status-In%20Progress...-green" />
-  </p> -->
+    <img alt="Asquare" longdesc="Asquare - Android Application" src="https://img.shields.io/badge/android-000.svg?style=flat-square&logo=ANDROID&labelColor=4285F4&logoColor=fff" />
+     <img alt="Asquare" src="https://img.shields.io/badge/Status-In%20Progress...-green" />
+  </p>
   
 </p>
 
@@ -23,16 +23,31 @@
 
 Once you're up and running with asquare
 
+<p align="left">
+  <img align="center" alt="Product: demo" src=".github_assets/screen_1.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_2.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_3.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_4.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_5.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_6.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_7.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_8.png" width="200" height="350" />
+  <img align="center" alt="Product: demo" src=".github_assets/screen_9.png" width="200" height="350" />
+</p>
 
 ## SETUP & USAGE
 
 - To start, Download or clone the repository by using `git clone https://github.com/arunahuja94/asquare.git`
 - npm install
-
+- npx react-native run-android
 
 
 ## TO-Do List
 
+- Code refactoring
+- Theme Support
+- Push / in-app Notifications
+- package updates
 - More to be added Soon .... 
 
 
