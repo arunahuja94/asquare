@@ -42,14 +42,25 @@ Once you're up and running with asquare
 - npx react-native run-android
 
 
+## FEATURES LIST
+
+- NO App Permission required
+- No Network/internet required
+- REALM for local databse for storing data with AES256 Encryption (encryption key on the basis of user's Master Password)
+- Add, edit, View Password with different categories 
+- Add, edit, View Cards (debit/credit)
+- Download data in csv file
+- Download backup file (encrypted with users master key)
+- Restore data with backup file
+- much more ... 
+
+
 ## TO-Do List
 
-- Multi Language support
-- Detect Jailbreak
-- Code refactoring
+- Multi Language -- logic implementation done ( text updation in app pending )
 - Theme Support
 - Push / in-app Notifications
-- package updates
+- Code refactoring (Progressive..)
 - More to be added Soon .... 
 
 
