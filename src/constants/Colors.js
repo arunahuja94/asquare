@@ -4,7 +4,8 @@ const appColors = {
     appYellow:'#FFD032',
     appLight:"#FFFFFF",
     appwhite:"#fff",
-    appBlack:"#000"
+    appBlack:"#000",
+    appBackgroundOne:"#212121"
 };
 export default appColors;
       

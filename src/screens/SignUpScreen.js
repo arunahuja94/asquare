@@ -16,6 +16,8 @@ import {
 import {Formik} from 'formik';
 import i18n from 'i18n-js';
 import appColors from '../constants/Colors';
+import appConstant from '../constants/AppConstant';
+
 function SignUpScreen() {
   const {signUp} = useContext(AuthContext);
   const [secondTextInput, secondTextInputUpdate] = useState('');
@@ -24,7 +26,10 @@ function SignUpScreen() {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
-      <FocusAwareStatusBar barStyle="light-content" backgroundColor={appColors.appBlack} />
+      <FocusAwareStatusBar
+        barStyle="light-content"
+        backgroundColor={appColors.appBlack}
+      />
       <View style={signUpStyles.logoConatiner}>
         <Image
           resizeMode={'contain'}
@@ -53,8 +58,8 @@ function SignUpScreen() {
                   keyboardType="numeric"
                   placeholder={i18n.t('master_password')}
                   placeholderTextColor={appColors.appwhite}
-                  onChangeText={handleChange('password')}
-                  onBlur={handleBlur('password')}
+                  onChangeText={handleChange(appConstant.password)}
+                  onBlur={handleBlur(appConstant.password)}
                   secureTextEntry={true}
                   style={signUpStyles.signUpTextInput}
                   value={values.password}
@@ -70,8 +75,8 @@ function SignUpScreen() {
                   }}
                   placeholder={i18n.t('confirm_master_password')}
                   placeholderTextColor={appColors.appwhite}
-                  onChangeText={handleChange('confirm_password')}
-                  onBlur={handleBlur('confirm_password')}
+                  onChangeText={handleChange(appConstant.confirm_password)}
+                  onBlur={handleBlur(appConstant.confirm_password)}
                   secureTextEntry={true}
                   style={signUpStyles.signUpTextInput}
                   value={values.confirm_password}
@@ -90,8 +95,8 @@ const signUpStyles = StyleSheet.create({
   signUpTextInput: {
     fontSize: 20,
     textAlign: 'center',
-    backgroundColor: '#212121',
-    color: '#fff',
+    backgroundColor: appColors.appBackgroundOne,
+    color: appColors.appwhite,
     elevation: 7,
     borderRadius: 15 / 2,
     width: 350,
