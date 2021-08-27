@@ -15,6 +15,7 @@ import {
 } from '../constants/helper';
 import {Formik} from 'formik';
 import i18n from 'i18n-js';
+import appColors from '../constants/Colors';
 function SignUpScreen() {
   const {signUp} = useContext(AuthContext);
   const [secondTextInput, secondTextInputUpdate] = useState('');
@@ -23,7 +24,7 @@ function SignUpScreen() {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
-      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#000" />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor={appColors.appBlack} />
       <View style={signUpStyles.logoConatiner}>
         <Image
           resizeMode={'contain'}
@@ -51,7 +52,7 @@ function SignUpScreen() {
                 <TextInput
                   keyboardType="numeric"
                   placeholder={i18n.t('master_password')}
-                  placeholderTextColor="#fff"
+                  placeholderTextColor={appColors.appwhite}
                   onChangeText={handleChange('password')}
                   onBlur={handleBlur('password')}
                   secureTextEntry={true}
@@ -68,7 +69,7 @@ function SignUpScreen() {
                     secondTextInputUpdate(input);
                   }}
                   placeholder={i18n.t('confirm_master_password')}
-                  placeholderTextColor="#fff"
+                  placeholderTextColor={appColors.appwhite}
                   onChangeText={handleChange('confirm_password')}
                   onBlur={handleBlur('confirm_password')}
                   secureTextEntry={true}

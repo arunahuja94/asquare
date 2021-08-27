@@ -1,9 +1,10 @@
-export default {
-    colors: {
-        blue:'#000119',
-        red:'#E3001A',
-        yellow:'#FFD032',
-        light:"#FFFFFF"
-    },
-  };
+const appColors = {
+    appBlue:'#000119',
+    appRed:'#E3001A',
+    appYellow:'#FFD032',
+    appLight:"#FFFFFF",
+    appwhite:"#fff",
+    appBlack:"#000"
+};
+export default appColors;
       
