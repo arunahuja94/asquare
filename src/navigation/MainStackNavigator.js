@@ -4,18 +4,18 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import {Dimensions, AppState} from 'react-native';
+import {AppState} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import JailBreakScreen from '../screens/JailBreak';
 import {generateKey, ensalt} from '../constants/enhelper';
 import {globalToast, AuthContext} from '../constants/helper';
 import SplashScreen from 'react-native-splash-screen';
 import DrawerScreen from './DrawerNavigation';
 import {appReducer, initialState} from '../store/reducer';
-
-const windowHeight = Dimensions.get('window').height;
+import JailMonkey from 'jail-monkey'
 
 const RootStack = createStackNavigator();
 const Stack = createStackNavigator();
@@ -118,6 +118,10 @@ function MainStackNavigator() {
     [],
   );
 
+  if (JailMonkey.isJailBroken()) {
+    return JailBreakScreen();
+  }
+
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
@@ -137,34 +141,32 @@ function MainStackNavigator() {
             headerBackTitleVisible: false,
           }}
           headerMode="float">
-          {state.userReg != null ? (
-            state.userToken != null ? (
-              <>
-                <Stack.Screen
-                  name="App"
-                  component={DrawerScreen}
-                  options={{
-                    title: '',
-                    headerShown: false,
-                  }}
-                />
-              </>
-            ) : (
-              <Stack.Screen
-                name="SignIn"
-                component={SignInScreen}
-                options={{
-                  title: '',
-                  headerShown: false,
-                  // When logging out, a pop animation feels intuitive
-                  animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                }}
-              />
-            )
-          ) : (
+          {state.userReg == null && (
             <Stack.Screen
               name="SignUp"
               component={SignUpScreen}
+              options={{
+                title: '',
+                headerShown: false,
+              }}
+            />
+          )}
+          {state.userReg != null && state.userToken == null && (
+            <Stack.Screen
+              name="SignIn"
+              component={SignInScreen}
+              options={{
+                title: '',
+                headerShown: false,
+                // When logging out, a pop animation feels intuitive
+                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+              }}
+            />
+          )}
+          {state.userReg != null && state.userToken != null && (
+            <Stack.Screen
+              name="App"
+              component={DrawerScreen}
               options={{
                 title: '',
                 headerShown: false,
