@@ -37,6 +37,7 @@ const appReducer = (prevState, action) => {
         isLoading: true,
         isSignout: false,
         userToken: null,
+        userReg:null
       };
 
   export {appReducer, initialState};
