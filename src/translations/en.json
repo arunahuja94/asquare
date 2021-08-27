@@ -1,0 +1,7 @@
+{
+    "master_password": "Master Password",
+    "confirm_master_password": "Confirm Master password",
+    "master_password_required":"Master Password is required",
+    "confirm_master_password_required":"Confirm Master Password is required",
+    "password_not_match":"Password doesn't match"
+}
