@@ -4,189 +4,24 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {View, Image, Dimensions, AppState} from 'react-native';
+import {Dimensions, AppState} from 'react-native';
 import EncryptedStorage from 'react-native-encrypted-storage';
 
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import Detail from '../screens/Detail';
-import singleDetail from '../screens/singleDetail';
-import CreateEditForm from '../screens/CreateEditForm';
-import creditCard from '../screens/creditCard';
-import singleCardCat from '../screens/singleCardCat';
-import creditcardInput from '../screens/creditcardInput';
-import importExport from '../screens/importExport';
-import {DrawerContent} from '../components/DrawerContent';
-import {generateKey,ensalt} from '../constants/enhelper';
-import {globalToast,AuthContext} from '../constants/helper';
-import SplashScreen from  "react-native-splash-screen";
-import helpAbout from '../screens/helpAbout';
+import {generateKey, ensalt} from '../constants/enhelper';
+import {globalToast, AuthContext} from '../constants/helper';
+import SplashScreen from 'react-native-splash-screen';
+import DrawerScreen from './DrawerNavigation';
+import {appReducer, initialState} from '../store/reducer';
+
 const windowHeight = Dimensions.get('window').height;
 
-function SplashS() {
-  return (
-    <View
-      style={{
-        backgroundColor: '#121212',
-        height: windowHeight,
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-      <View style={{width: 300, height: 80}}>
-        <Image
-          style={{flex: 1, width: '100%', height: undefined}}
-          source={require('../assets/img/logo2-darkbg.png')}
-        />
-      </View>
-    </View>
-  );
-}
-
-const Stack = createStackNavigator();
 const RootStack = createStackNavigator();
-const passwordStackNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Detail"
-        component={Detail}
-        options={{
-          headerShown: false,
-          title: 'Password Manager',
-        }}
-      />
-      <Stack.Screen
-        name="singleDetail"
-        component={singleDetail}
-        options={{
-          headerShown: false,
-          title: 'Password',
-        }}
-      />
-      <Stack.Screen
-        name="HelloForm"
-        component={CreateEditForm}
-        options={{
-          title: '',
-          headerStyle: {
-            backgroundColor: '#FFDE03', //TODO
-            elevation: 0, // remove shadow on Android
-          },
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerTintColor: '#121212',
-        }}
-        screenOptions={{
-          gestureResponseDistance: 'horizontal',
-          gestureEnabled: true,
-          headerBackTitleVisible: false,
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
-
-const creditcardStackNavigator = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="creditCard"
-        component={creditCard}
-        options={{
-          headerShown: false,
-        }}
-      />
-
-      <Stack.Screen
-        name="creditcardInput"
-        component={creditcardInput}
-        options={{
-          title: '',
-          headerStyle: {
-            backgroundColor: '#FFDE03', //TODO
-            elevation: 0, // remove shadow on Android
-          },
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
-          headerTintColor: '#121212',
-        }}
-        screenOptions={{
-          gestureResponseDistance: 'horizontal',
-          gestureEnabled: true,
-          headerBackTitleVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="singleCardCat"
-        component={singleCardCat}
-        options={{headerShown: false, title: 'Cards'}}
-      />
-    </Stack.Navigator>
-  );
-};
-// const Tabs = createBottomTabNavigator();
-// const TabsScreen = () => (
-//   <Tabs.Navigator>
-//     <Tabs.Screen name="password" component={passwordStackNavigator} />
-//     <Tabs.Screen name="Cards" component={creditcardStackNavigator} />
-//   </Tabs.Navigator>
-// );
-
-const Drawer = createDrawerNavigator();
-const DrawerScreen = () => (
-  <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-    <Drawer.Screen name="password" component={passwordStackNavigator} />
-    <Drawer.Screen name="cards" component={creditcardStackNavigator} />
-    <Drawer.Screen name="importExport" component={importExport} />
-    <Drawer.Screen name="helpAbout" component={helpAbout} />
-  </Drawer.Navigator>
-);
+const Stack = createStackNavigator();
 
 function MainStackNavigator() {
-  const [state, dispatch] = React.useReducer(
-    (prevState, action) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false,
-          };
-        case 'RESTORE_REG':
-          return {
-            ...prevState,
-            userReg: action.token,
-            isLoading: false,
-          };
-        case 'SIGN_UP':
-          return {
-            ...prevState,
-            userReg: action.token,
-            isLoading: false,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null,
-          };
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      userToken: null,
-    },
-  );
+  const [state, dispatch] = React.useReducer(appReducer, initialState);
   const appState = useRef(AppState.currentState);
   //const [appStateVisible, setAppStateVisible] = useState(appState.current);
 
@@ -213,6 +48,7 @@ function MainStackNavigator() {
     //setAppStateVisible(appState.current);
     console.log('AppState', appState.current);
   };
+
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
@@ -288,7 +124,6 @@ function MainStackNavigator() {
         <RootStack.Navigator
           initialRouteName="Splash"
           screenOptions={{
-            // gestureDirection: 'horizontal',
             gestureEnabled: true,
             headerMode: 'float',
             cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -302,17 +137,7 @@ function MainStackNavigator() {
             headerBackTitleVisible: false,
           }}
           headerMode="float">
-            {/* state.isLoading ? (
-            // We haven't finished checking for the token yet
-            <Stack.Screen
-              name="Splash"
-              component={SplashS}
-              options={{
-                headerShown: false,
-              }}
-            />
-          ) : */}
-          { state.userReg != null ? (
+          {state.userReg != null ? (
             state.userToken != null ? (
               <>
                 <Stack.Screen
