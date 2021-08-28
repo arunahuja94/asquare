@@ -61,7 +61,6 @@ Once you're up and running with asquare
 - Multi Language -- logic implementation done ( text updation in app pending )
 - Theme Support
 - Add password category dynamically
-- Push / in-app Notifications
 - Code refactoring (Progressive..)
 - More to be added Soon .... 
 
