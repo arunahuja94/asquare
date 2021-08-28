@@ -128,7 +128,7 @@ function MainStackNavigator() {
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         <RootStack.Navigator
-          initialRouteName="Splash"
+          //initialRouteName="Splash"
           screenOptions={{
             gestureEnabled: true,
             headerMode: 'float',
@@ -143,7 +143,7 @@ function MainStackNavigator() {
             headerBackTitleVisible: false,
           }}
           headerMode="float">
-          {state.userReg == null && (
+          {!state.userReg && (
             <Stack.Screen
               name="SignUp"
               component={SignUpScreen}
@@ -153,7 +153,7 @@ function MainStackNavigator() {
               }}
             />
           )}
-          {state.userReg != null && state.userToken == null && (
+          {state.userReg && !state.userToken && (
             <Stack.Screen
               name="SignIn"
               component={SignInScreen}
@@ -165,7 +165,7 @@ function MainStackNavigator() {
               }}
             />
           )}
-          {state.userReg != null && state.userToken != null && (
+          {(state.userReg && state.userToken) && (
             <Stack.Screen
               name="App"
               component={DrawerScreen}
