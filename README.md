@@ -46,6 +46,7 @@ Once you're up and running with asquare
 
 - NO App Permission required
 - No Network/internet required
+- Jail Break Detection
 - App Lock with Master Password and Fingerprint Scanner
 - REALM for local databse for storing data with AES256 Encryption (encryption key on the basis of user's Master Password)
 - Add, edit, View Password with different categories 
