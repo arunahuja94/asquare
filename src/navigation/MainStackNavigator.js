@@ -5,8 +5,6 @@ import {
   CardStyleInterpolators,
 } from '@react-navigation/stack';
 import {AppState} from 'react-native';
-import EncryptedStorage from 'react-native-encrypted-storage';
-
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import JailBreakScreen from '../screens/JailBreak';
@@ -16,6 +14,10 @@ import SplashScreen from 'react-native-splash-screen';
 import DrawerScreen from './DrawerNavigation';
 import {appReducer, initialState} from '../store/reducer';
 import JailMonkey from 'jail-monkey'
+import i18n from 'i18n-js';
+import appConstant from '../constants/AppConstant';
+import appConsoleLogs from '../Utils/appConsoleLogs';
+import AppStorage from '../Utils/appStorageService';
 
 const RootStack = createStackNavigator();
 const Stack = createStackNavigator();
@@ -38,7 +40,7 @@ function MainStackNavigator() {
       appState.current.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
-      console.log('App has come to the foreground!');
+      appConsoleLogs('App has come to the foreground!');
     } else {
       // dispatch({ type: 'SIGN_OUT' });
       // globalToast("App Locked");
@@ -46,7 +48,7 @@ function MainStackNavigator() {
 
     appState.current = nextAppState;
     //setAppStateVisible(appState.current);
-    console.log('AppState', appState.current);
+    appConsoleLogs('AppState', appState.current);
   };
 
   useEffect(() => {
@@ -55,8 +57,8 @@ function MainStackNavigator() {
       let userReg;
       let userToken;
       try {
-        userReg = await EncryptedStorage.getItem('userReg');
-        userToken = await EncryptedStorage.getItem('userToken');
+        userReg = await AppStorage.getItem(appConstant.User_Reg_Key);
+        userToken = await AppStorage.getItem(appConstant.User_Token);
       } catch (e) {
         // Restoring token failed
       }
@@ -76,20 +78,20 @@ function MainStackNavigator() {
     () => ({
       signIn: async (data, actions, type) => {
         try {
-          const masterToken = await EncryptedStorage.getItem('masterToken');
+          const masterToken = await AppStorage.getItem(appConstant.Master_Token);
           if (type == 'mp' && masterToken !== undefined) {
             let passs = data.password;
             actions.setSubmitting(false);
             if (masterToken === passs) {
               dispatch({type: 'SIGN_IN', token: 'true'});
-              globalToast('Signed In');
+              globalToast(i18n.t('Signed_In'));
             } else {
-              globalToast('Enter the correct Master password');
+              globalToast(i18n.t('master_password_incorrect'));
             }
           } else if (type == 'fp') {
-            console.log('returned');
+            appConsoleLogs('returned');
             dispatch({type: 'SIGN_IN', token: 'true'});
-            globalToast('Signed In');
+            globalToast(i18n.t('Signed_In'));
           } else {
           }
         } catch (error) {
@@ -98,20 +100,20 @@ function MainStackNavigator() {
       },
       signOut: () => {
         dispatch({type: 'SIGN_OUT'});
-        globalToast('Signed Out');
+        globalToast(i18n.t('Signed_Out'));
       },
       signUp: async (data, actions) => {
         let master_pass = data.password;
         try {
-          await EncryptedStorage.setItem('userReg', 'true');
-          await EncryptedStorage.setItem('masterToken', master_pass);
+           AppStorage.setItem(appConstant.User_Reg_Key, 'true');
+           AppStorage.setItem(appConstant.Master_Token, master_pass);
           generateKey(master_pass, ensalt, 5000, 350).then((key) => {
-            EncryptedStorage.setItem('masterTokenHash', key);
+            AppStorage.setItem(appConstant.Master_Token_Hash, key);
           });
           dispatch({type: 'SIGN_UP', token: 'true'});
-          globalToast('Master Password Created Successfully');
+          globalToast(i18n.t('master_password_created'));
         } catch (error) {
-          console.log(error);
+          appConsoleLogs(error);
         }
       },
     }),

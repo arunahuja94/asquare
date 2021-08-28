@@ -3,5 +3,9 @@
     "confirm_master_password": "Confirmer le mot de passe principal",
     "master_password_required":"Le mot de passe principal est requis",
     "confirm_master_password_required":"Confirmer le mot de passe principal est requis",
-    "password_not_match":"Le mot de passe ne correspond pas"
+    "password_not_match":"Le mot de passe ne correspond pas",
+    "master_password_created":"Master Password Created Successfully",
+    "master_password_incorrect":"Enter the correct Master password",
+    "Signed_Out":"Signed Out",
+    "Signed_In":"Signed In"
 }
