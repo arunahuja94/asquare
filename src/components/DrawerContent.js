@@ -1,16 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 
 import Icon from '../components/icons';
 
-import {AuthContext} from '../constants/helper';
+import {AuthContext} from '../store/authContext';
 
 export function DrawerContent(props) {
   const drawerColor = '#fff';
   const drawerIconSize = 20;
 
-  const {signOut} = React.useContext(AuthContext);
+  const { authState, authActions } = useContext(AuthContext);
 
   return (
     <View style={{flex: 1, backgroundColor: '#000'}}>
@@ -111,7 +111,7 @@ export function DrawerContent(props) {
           )}
           label={() => <Text style={{color: drawerColor}}>SIgn Out</Text>}
           onPress={() => {
-            signOut();
+            authActions.signOut();
           }}
         />
       </View>

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {
   Image,
   Text,
@@ -13,10 +13,11 @@ import FingerprintScanner from 'react-native-fingerprint-scanner';
 import Icon from '../components/icons';
 import styles from './SignInScreen.styles';
 import FingerprintPopup from '../components/FingerprintPopup.component';
-import {AuthContext, FocusAwareStatusBar} from '../constants/helper';
+import {FocusAwareStatusBar} from '../constants/helper';
+import {AuthContext} from '../store/authContext';
 import {Formik} from 'formik';
 function SignInScreen() {
-  const {signIn} = React.useContext(AuthContext);
+  const { authState, authActions } = useContext(AuthContext);
   const [errorMessage, errorMessageUpdate] = React.useState(undefined);
   const [biometric, biometricUpdate] = React.useState(undefined);
   const [appState, appStateUpdate] = React.useState('');
@@ -67,7 +68,7 @@ function SignInScreen() {
   }
 
   function onAuthenticate(data) {
-    signIn(data, '', 'fp');
+    authActions.signIn(data, '', 'fp');
   }
   return (
     <KeyboardAvoidingView
@@ -91,7 +92,7 @@ function SignInScreen() {
           }}>
           <Formik
             initialValues={{password: ''}}
-            onSubmit={(values, actions) => signIn(values, actions, 'mp')}>
+            onSubmit={(values, actions) => authActions.signIn(values, actions, 'mp')}>
             {({handleChange, handleBlur, handleSubmit, values}) => (
               <View>
                 <TextInput

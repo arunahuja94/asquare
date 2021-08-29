@@ -1,14 +1,24 @@
 import React from 'react';
-import { LogBox} from 'react-native';
+import {LogBox} from 'react-native';
 import MainStackNavigator from './src/navigation/MainStackNavigator';
+import AuthProvider from './src/store/authProvider';
 import setI18nConfig from './src/Utils/appLanguage';
+import JailMonkey from 'jail-monkey';
+import JailBreakScreen from './src/screens/JailBreak';
 LogBox.ignoreAllLogs();
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    setI18nConfig(); // set initial config
+setI18nConfig();
+
+function App() {
+
+  if (JailMonkey.isJailBroken()) {
+    return JailBreakScreen();
   }
-  render() {
-    return <MainStackNavigator />;
-  }
+
+  return (
+    <AuthProvider>
+      <MainStackNavigator />
+    </AuthProvider>
+  );
 }
+
+export default App;

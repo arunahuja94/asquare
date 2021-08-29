@@ -9,17 +9,17 @@ import {
 } from 'react-native';
 import styles from './SignInScreen.styles';
 import {
-  AuthContext,
   FocusAwareStatusBar,
   globalToast,
 } from '../constants/helper';
+import {AuthContext} from '../store/authContext';
 import {Formik} from 'formik';
 import i18n from 'i18n-js';
 import appColors from '../constants/Colors';
 import appConstant from '../constants/AppConstant';
 
 function SignUpScreen() {
-  const {signUp} = useContext(AuthContext);
+  const { authState, authActions } = useContext(AuthContext);
   const [secondTextInput, secondTextInputUpdate] = useState('');
 
   return (
@@ -49,7 +49,7 @@ function SignUpScreen() {
               } else if (values.password !== values.confirm_password) {
                 globalToast(i18n.t('password_not_match'));
               } else {
-                signUp(values, actions);
+                authActions.signUp(values, actions);
               }
             }}>
             {({handleChange, handleBlur, handleSubmit, values}) => (

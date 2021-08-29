@@ -16,5 +16,3 @@ export const globalToast = (message) => {
     50,
   );
 }
-
-export const AuthContext = React.createContext();
