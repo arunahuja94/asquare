@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useReducer, useMemo} from 'react';
-import {AppState} from 'react-native';
 import {generateKey, ensalt} from '../constants/enhelper';
 import {globalToast} from '../constants/helper';
 import SplashScreen from 'react-native-splash-screen';
@@ -12,55 +11,28 @@ import {AuthContext} from '../store/authContext';
 
 function AuthProvider(props) {
   const [authState, dispatch] = useReducer(appReducer, initialState);
-  const appState = useRef(AppState.currentState);
-  //const [appStateVisible, setAppStateVisible] = useState(appState.current);
-
   useEffect(() => {
-    AppState.addEventListener('change', _handleAppStateChange);
-    SplashScreen.hide();
-
-    return () => {
-      AppState.removeEventListener('change', _handleAppStateChange);
-    };
-  }, []);
-  const _handleAppStateChange = (nextAppState) => {
-    if (
-      appState.current.match(/inactive|background/) &&
-      nextAppState === 'active'
-    ) {
-      appConsoleLogs('App has come to the foreground!');
-    } else {
-      // dispatch({ type: 'SIGN_OUT' });
-      // globalToast("App Locked");
-    }
-
-    appState.current = nextAppState;
-    //setAppStateVisible(appState.current);
-    appConsoleLogs('AppState', appState.current);
-  };
-
-  useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const bootstrapAsync = async () => {
-      let userReg;
-      let userToken;
-      try {
-        userReg = await AppStorage.getItem(appConstant.User_Reg_Key);
-        userToken = await AppStorage.getItem(appConstant.User_Token);
-      } catch (e) {
-        // Restoring token failed
-      }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      dispatch({type: 'RESTORE_REG', token: userReg});
-      dispatch({type: 'RESTORE_TOKEN', token: userToken});
-    };
-
     bootstrapAsync();
+    SplashScreen.hide();
   }, []);
+
+  const bootstrapAsync = async () => {
+    let userReg;
+    let userToken;
+    try {
+      userReg = await AppStorage.getItem(appConstant.User_Reg_Key);
+      userToken = await AppStorage.getItem(appConstant.User_Token);
+    } catch (e) {
+      // Restoring token failed
+    }
+    appConsoleLogs(userReg, userToken, 'returned userToken');
+    // After restoring token, we may need to validate it in production apps
+
+    // This will switch to the App screen or Auth screen and this loading
+    // screen will be unmounted and thrown away.
+    dispatch({type: 'RESTORE_REG', token: userReg});
+    dispatch({type: 'RESTORE_TOKEN', token: userToken});
+  };
 
   const authActions = useMemo(
     () => ({

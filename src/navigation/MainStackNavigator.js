@@ -32,10 +32,10 @@ function MainStackNavigator() {
           headerBackTitleVisible: false,
         }}
         headerMode="float">
-        {!authState.userReg && (
+        {authState.userReg && authState.userToken && (
           <Stack.Screen
-            name="SignUp"
-            component={SignUpScreen}
+            name="App"
+            component={DrawerScreen}
             options={{
               title: '',
               headerShown: false,
@@ -54,10 +54,10 @@ function MainStackNavigator() {
             }}
           />
         )}
-        {authState.userReg && authState.userToken && (
+        {(!authState.userReg && !authState.userToken) && (
           <Stack.Screen
-            name="App"
-            component={DrawerScreen}
+            name="SignUp"
+            component={SignUpScreen}
             options={{
               title: '',
               headerShown: false,
