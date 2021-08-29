@@ -13,8 +13,13 @@ function AuthProvider(props) {
   const [authState, dispatch] = useReducer(appReducer, initialState);
   useEffect(() => {
     bootstrapAsync();
-    SplashScreen.hide();
   }, []);
+
+  useEffect(() => {
+    if (!authState.isLoading) {
+      SplashScreen.hide();
+    }
+  }, [authState.isLoading]);
 
   const bootstrapAsync = async () => {
     let userReg;
@@ -25,7 +30,6 @@ function AuthProvider(props) {
     } catch (e) {
       // Restoring token failed
     }
-    appConsoleLogs(userReg, userToken, 'returned userToken');
     // After restoring token, we may need to validate it in production apps
 
     // This will switch to the App screen or Auth screen and this loading
@@ -54,10 +58,9 @@ function AuthProvider(props) {
             appConsoleLogs('returned');
             dispatch({type: 'SIGN_IN', token: 'true'});
             globalToast(i18n.t('Signed_In'));
-          } else {
           }
         } catch (error) {
-          // There was an error on the native side
+            appConsoleLogs(error, 'error in store actions');
         }
       },
       signOut: () => {
@@ -81,6 +84,10 @@ function AuthProvider(props) {
     }),
     [],
   );
+
+  if (authState.isLoading) {
+    return <></>;
+  }
 
   return (
     <AuthContext.Provider
