@@ -10,16 +10,16 @@ export function DrawerContent(props) {
   const drawerColor = '#fff';
   const drawerIconSize = 20;
 
-  const { authState, authActions } = useContext(AuthContext);
+  const {authState, authActions} = useContext(AuthContext);
 
   return (
     <View style={{flex: 1, backgroundColor: '#000'}}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
-            <View style={styles.circle1}></View>
-            <View style={styles.circle2}></View>
-            <View style={styles.circle3}></View>
+            <View style={styles.circle1} />
+            <View style={styles.circle2} />
+            <View style={styles.circle3} />
             <View
               style={{
                 width: 200,
@@ -82,7 +82,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate('importExport');
               }}
             />
-              <DrawerItem
+            <DrawerItem
               icon={() => (
                 <Icon.Ionicons
                   name="alert-circle-outline"

@@ -7,13 +7,13 @@ import {
   TouchableOpacity,
   SectionList,
   FlatList,
-  Pressable
+  Pressable,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {getAllData, retrieveUserSession} from './../db/operations';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from '../components/icons';
-import {FocusAwareStatusBar,globalToast} from '../constants/helper';
+import {FocusAwareStatusBar, globalToast} from '../constants/helper';
 const Detail = ({navigation}) => {
   const [passwords, SetPasswords] = useState([]);
   const [hasData, sethasData] = useState(false);
@@ -268,11 +268,10 @@ const Detail = ({navigation}) => {
                             createFlag: 0,
                           })
                         }
-                        onLongPress={() =>{
+                        onLongPress={() => {
                           Clipboard.setString(item.password);
                           globalToast('Password copied to Clipboard');
-                        }
-                        }
+                        }}
                         android_ripple={{color: '#F9F9F9'}}
                         style={styles.passwordList}>
                         <View

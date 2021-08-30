@@ -13,7 +13,7 @@ const RootStack = createStackNavigator();
 const Stack = createStackNavigator();
 
 function MainStackNavigator() {
-  const { authState, authActions } = useContext(AuthContext);
+  const {authState, authActions} = useContext(AuthContext);
   return (
     <NavigationContainer>
       <RootStack.Navigator
@@ -54,7 +54,7 @@ function MainStackNavigator() {
             }}
           />
         )}
-        {(!authState.userReg && !authState.userToken) && (
+        {!authState.userReg && !authState.userToken && (
           <Stack.Screen
             name="SignUp"
             component={SignUpScreen}

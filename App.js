@@ -9,7 +9,6 @@ LogBox.ignoreAllLogs();
 setI18nConfig();
 
 function App() {
-
   if (JailMonkey.isJailBroken()) {
     return JailBreakScreen();
   }

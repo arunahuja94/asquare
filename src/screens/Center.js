@@ -10,7 +10,7 @@ import {
   I18nManager,
   Text,
   Button,
-  TextInput
+  TextInput,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -47,13 +47,8 @@ export const FormInput = ({
   </View>
 );
 
-export const FormButton = ({title, buttonType, buttonColor, ...rest}) => (  
- <Button
-  {...rest}
-  title={title}
-  color={buttonColor}
-/>
- 
+export const FormButton = ({title, buttonType, buttonColor, ...rest}) => (
+  <Button {...rest} title={title} color={buttonColor} />
 );
 
 export const ErrorMessage = ({errorValue}) => (

@@ -240,9 +240,10 @@ const creditCard = ({navigation}) => {
                             }
                             onLongPressfunc={() => {
                               Clipboard.setString(item.number);
-                              globalToast('Credit card number copied to Clipboard');
-                            }
-                            }
+                              globalToast(
+                                'Credit card number copied to Clipboard',
+                              );
+                            }}
                           />
                         </View>
                       )}

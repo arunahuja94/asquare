@@ -15,4 +15,4 @@ export const globalToast = (message) => {
     25,
     50,
   );
-}
+};

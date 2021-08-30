@@ -3,7 +3,10 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import importExport from '../screens/importExport';
 import {DrawerContent} from '../components/DrawerContent';
 import helpAbout from '../screens/helpAbout';
-import {passwordStackNavigator,creditcardStackNavigator} from './StackNavigation';
+import {
+  passwordStackNavigator,
+  creditcardStackNavigator,
+} from './StackNavigation';
 
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (

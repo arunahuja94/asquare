@@ -8,10 +8,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import styles from './SignInScreen.styles';
-import {
-  FocusAwareStatusBar,
-  globalToast,
-} from '../constants/helper';
+import {FocusAwareStatusBar, globalToast} from '../constants/helper';
 import {AuthContext} from '../store/authContext';
 import {Formik} from 'formik';
 import i18n from 'i18n-js';
@@ -19,7 +16,7 @@ import appColors from '../constants/Colors';
 import appConstant from '../constants/AppConstant';
 
 function SignUpScreen() {
-  const { authState, authActions } = useContext(AuthContext);
+  const {authState, authActions} = useContext(AuthContext);
   const [secondTextInput, secondTextInputUpdate] = useState('');
 
   return (

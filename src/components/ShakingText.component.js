@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import {
-  Animated,
-  Text
-} from 'react-native';
+import React, {Component} from 'react';
+import {Animated, Text} from 'react-native';
 
 class ShakingText extends Component {
-
   componentWillMount() {
     this.shakedValue = new Animated.Value(0);
   }
@@ -52,7 +48,7 @@ class ShakingText extends Component {
 ShakingText.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
+    PropTypes.node,
   ]),
   style: Text.propTypes.style,
 };

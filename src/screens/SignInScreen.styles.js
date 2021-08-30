@@ -1,6 +1,6 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
-const { width } = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -8,10 +8,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#121212'
+    backgroundColor: '#121212',
   },
-  logo_style:{
-  width: '100%', height: '100%'
+  logo_style: {
+    width: '100%',
+    height: '100%',
   },
   heading: {
     color: '#ffffff',
@@ -27,15 +28,14 @@ export default StyleSheet.create({
     marginBottom: 30,
   },
   fingerprint: {
-    flexDirection:'row',
+    flexDirection: 'row',
     padding: 20,
     marginBottom: 30,
   },
-  ftext:
-  {
-color:'#37ac57',
-alignItems:'center',
-paddingTop:8
+  ftext: {
+    color: '#37ac57',
+    alignItems: 'center',
+    paddingTop: 8,
   },
   errorMessage: {
     color: '#ea4336',
@@ -46,5 +46,5 @@ paddingTop:8
   },
   popup: {
     width: width * 0.8,
-  }
+  },
 });
