@@ -59,6 +59,8 @@ Once you're up and running with asquare
 
 ## TO-Do List
 
+- Github Actions
+- Jest
 - Multi Language -- logic implementation done ( text updation in app pending )
 - Theme Support
 - Add password category dynamically

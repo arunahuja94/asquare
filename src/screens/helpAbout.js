@@ -13,6 +13,8 @@ import {Ripple, Center} from './Center';
 import Icon from '../components/icons';
 import styles from './helpAbout.styles.js'
 import {FocusAwareStatusBar,globalToast} from '../constants/helper';
+import { getVersion } from 'react-native-device-info';
+
 const helpAbout = ({navigation}) => {
   return (
     <View
@@ -158,7 +160,7 @@ const helpAbout = ({navigation}) => {
           style={styles.logo_style}
           source={require('../assets/img/logo2-lightbg.png')}
         />
-      <Text style={styles.version}>v1.0</Text>
+      <Text style={styles.version}>v {getVersion()}</Text>
       </View>
      
       </View>
