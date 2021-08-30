@@ -138,7 +138,7 @@ const CreateEditForm = (props) => {
       // Do something when the screen is unfocused
       // Useful for cleanup functions
     };
-  }, [id,RouteParams,navigation]);
+  }, [id, RouteParams, navigation]);
   function renderErrormsg(msg) {
     return <Text style={styles.errorMsg}>{msg}</Text>;
   }

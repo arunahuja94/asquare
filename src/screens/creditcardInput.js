@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
 // setcreditdata(NULL);
 // updatecardType('');
 
-function creditcardInput(props) {
+function CreditcardInput(props) {
   const {navigation, route} = props;
   const RouteParams = route.params;
   const [creditdata, setcreditdata] = useState([]);
@@ -82,11 +82,11 @@ function creditcardInput(props) {
 
       updatecardType(RouteParams.Ctype);
     }
-  }, []);
+  }, [RouteParams]);
 
   useEffect(() => {
     if (!RouteParams.createFlag && RouteParams.item != 'No-Item') {
-      props.navigation.setOptions({
+      navigation.setOptions({
         title: 'Edit Card',
         headerRight: () => (
           <View style={{flexDirection: 'row'}}>
@@ -153,7 +153,7 @@ function creditcardInput(props) {
       });
     } else {
       // Create Form Navigation Option for
-      props.navigation.setOptions({
+      navigation.setOptions({
         title: 'Add Card',
         headerRight: () => (
           <TouchableOpacity
@@ -187,7 +187,7 @@ function creditcardInput(props) {
         ),
       });
     }
-  }, [creditdata, cardType, id]);
+  }, [creditdata, cardType, id, RouteParams]);
 
   function _onChange(formData) {
     setcreditdata(formData);
@@ -299,4 +299,4 @@ function creditcardInput(props) {
   );
 }
 
-export default creditcardInput;
+export default CreditcardInput;

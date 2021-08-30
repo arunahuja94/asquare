@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import {
   TextInput,
@@ -11,14 +11,20 @@ const windowWidth = Dimensions.get('window').width;
 import {FocusAwareStatusBar} from '../constants/helper';
 const SingleCardCat = (props) => {
   const {navigation, route} = props;
-  const RouteParams = route.params;
+  const RouteParams = route?.params;
   const [text, setText] = useState('');
-  if (!RouteParams.createFlag && RouteParams.item != 'No-Item') {
-    var [cardsholder, setcardsholder] = useState(RouteParams.item);
-    var [cards, setcards] = useState(RouteParams.item);
-    var [cardTypeName, setcardTypeName] = useState(RouteParams.cardType);
-  } else {
-  }
+  const [cardsholder, setcardsholder] = useState([]);
+  const [cards, setcards] = useState([]);
+  const [cardTypeName, setcardTypeName] = useState('');
+
+  useEffect(() => {
+    if (!RouteParams.createFlag && RouteParams.item != 'No-Item') {
+      setcards(RouteParams.item);
+      setcardsholder(RouteParams.item);
+      setcardTypeName(RouteParams.cardType);
+    }
+  }, [RouteParams]);
+
   const searchData = (text) => {
     const newData = cardsholder.filter((item) => {
       const itemData = item.number.toUpperCase();

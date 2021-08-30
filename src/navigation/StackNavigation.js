@@ -5,7 +5,7 @@ import SingleDetail from '../screens/SingleDetail';
 import CreateEditForm from '../screens/CreateEditForm';
 import CreditCard from '../screens/CreditCard';
 import SingleCardCat from '../screens/SingleCardCat';
-import creditcardInput from '../screens/creditcardInput';
+import CreditcardInput from '../screens/CreditcardInput';
 
 const Stack = createStackNavigator();
 const passwordStackNavigator = () => {
@@ -64,7 +64,7 @@ const creditcardStackNavigator = () => {
 
       <Stack.Screen
         name="creditcardInput"
-        component={creditcardInput}
+        component={CreditcardInput}
         options={{
           title: '',
           headerStyle: {
