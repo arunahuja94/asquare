@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -17,14 +17,18 @@ const SingleDetail = (props) => {
   const {navigation, route} = props;
   const RouteParams = route.params;
   const [text, setText] = useState('');
-  if (!RouteParams.createFlag && RouteParams.item != 'No-Item') {
-    var [passwordsholder, setpasswordsholder] = useState(RouteParams.item);
-    var [passwords, setPasswords] = useState(RouteParams.item);
-    var [passwordTypeName, setpasswordTypeName] = useState(
-      RouteParams.passwordType,
-    );
-  } else {
-  }
+  const [passwordsholder, setpasswordsholder] = useState([]);
+  const [passwords, setPasswords] = useState([]);
+  const [passwordTypeName, setpasswordTypeName] = useState('');
+
+  useEffect(() => {
+    if (!RouteParams.createFlag && RouteParams.item != 'No-Item') {
+      setPasswords(RouteParams.item);
+      setpasswordsholder(RouteParams.item);
+      setpasswordTypeName(RouteParams.passwordType);
+    }
+  }, [RouteParams]);
+
   const searchData = (text) => {
     const newData = passwordsholder.filter((item) => {
       const itemData = item.name.toUpperCase();
