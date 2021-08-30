@@ -187,7 +187,7 @@ function CreditcardInput(props) {
         ),
       });
     }
-  }, [creditdata, cardType, id, RouteParams]);
+  }, [creditdata, cardType, id, RouteParams, navigation]);
 
   function _onChange(formData) {
     setcreditdata(formData);
