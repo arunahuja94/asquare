@@ -56,7 +56,7 @@ Once you're up and running with asquare
 
 ## TO-Do List
 
-- Jest
+- Jest with github action for npm test
 - Multi Language -- logic implementation done ( text updation in app pending )
 - Theme Support
 - Add password category dynamically
