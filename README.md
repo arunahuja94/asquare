@@ -18,7 +18,6 @@
   
 </p>
 
- 
 ## Look and feel
 
 Once you're up and running with asquare
@@ -41,7 +40,6 @@ Once you're up and running with asquare
 - npm install
 - npx react-native run-android
 
-
 ## FEATURES LIST
 
 - NO App Permission required
@@ -49,13 +47,12 @@ Once you're up and running with asquare
 - Jail Break Detection
 - App Lock with Master Password and Fingerprint Scanner
 - REALM for local databse for storing data with AES256 Encryption (encryption key on the basis of user's Master Password)
-- Add, edit, View Password with different categories 
+- Add, edit, View Password with different categories
 - Add, edit, View Cards (debit/credit)
 - Download data in csv file
 - Download backup file (encrypted with users master key)
 - Restore data with backup file
-- much more ... 
-
+- much more ...
 
 ## TO-Do List
 
@@ -64,7 +61,7 @@ Once you're up and running with asquare
 - Theme Support
 - Add password category dynamically
 - Code refactoring (Progressive..)
-- More to be added Soon .... 
+- More to be added Soon ....
 
 ## Contributing
 
@@ -74,9 +71,6 @@ Once you're up and running with asquare
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
-
 ## Support Us
 
 If you like this project please give a star
-
-
