@@ -74,6 +74,7 @@ const CreateEditForm = (props) => {
   var [Pass, setPass] = useState([]); //TODO
   const [isCreate, setIsCreate] = useState(false);
   const [id, setId] = useState(null);
+
   useEffect(() => {
     if (!RouteParams.createFlag && RouteParams.item != 'No-Item') {
       updatepasswordType(RouteParams.item.type);
@@ -84,11 +85,11 @@ const CreateEditForm = (props) => {
     } else {
       setIsCreate(true);
     }
-  }, []);
+  }, [RouteParams]);
 
   useEffect(() => {
     if (!RouteParams.createFlag && RouteParams.item != 'No-Item') {
-      props.navigation.setOptions({
+      navigation.setOptions({
         title: 'Edit Password',
         headerRight: () => (
           <TouchableOpacity
@@ -128,7 +129,7 @@ const CreateEditForm = (props) => {
         ),
       });
     } else {
-      props.navigation.setOptions({
+      navigation.setOptions({
         title: 'Add Password',
         headerRight: () => <></>,
       });
@@ -137,7 +138,7 @@ const CreateEditForm = (props) => {
       // Do something when the screen is unfocused
       // Useful for cleanup functions
     };
-  }, [id]);
+  }, [id,RouteParams,navigation]);
   function renderErrormsg(msg) {
     return <Text style={styles.errorMsg}>{msg}</Text>;
   }

@@ -1,10 +1,10 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Detail from '../screens/Detail';
-import singleDetail from '../screens/singleDetail';
+import SingleDetail from '../screens/SingleDetail';
 import CreateEditForm from '../screens/CreateEditForm';
-import creditCard from '../screens/creditCard';
-import singleCardCat from '../screens/singleCardCat';
+import CreditCard from '../screens/CreditCard';
+import SingleCardCat from '../screens/SingleCardCat';
 import creditcardInput from '../screens/creditcardInput';
 
 const Stack = createStackNavigator();
@@ -21,7 +21,7 @@ const passwordStackNavigator = () => {
       />
       <Stack.Screen
         name="singleDetail"
-        component={singleDetail}
+        component={SingleDetail}
         options={{
           headerShown: false,
           title: 'Password',
@@ -55,8 +55,8 @@ const creditcardStackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="creditCard"
-        component={creditCard}
+        name="CreditCard"
+        component={CreditCard}
         options={{
           headerShown: false,
         }}
@@ -84,7 +84,7 @@ const creditcardStackNavigator = () => {
       />
       <Stack.Screen
         name="singleCardCat"
-        component={singleCardCat}
+        component={SingleCardCat}
         options={{headerShown: false, title: 'Cards'}}
       />
     </Stack.Navigator>

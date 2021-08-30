@@ -13,9 +13,9 @@ import {CardView} from 'react-native-credit-card-input-view';
 import Icon from '../components/icons';
 import {useFocusEffect} from '@react-navigation/native';
 import {FocusAwareStatusBar, globalToast} from '../constants/helper';
-import {getAllcardData, retrieveUserSession} from './../db/operations';
+import {getAllcardData, retrieveUserSession} from '../db/operations';
 import Clipboard from '@react-native-clipboard/clipboard';
-const creditCard = ({navigation}) => {
+const CreditCard = ({navigation}) => {
   const [hasData, sethasData] = useState(false);
   const [cards, SetCards] = useState([]);
   useFocusEffect(
@@ -41,11 +41,10 @@ const creditCard = ({navigation}) => {
       };
     }, []),
   );
-  function cardperType(cards, type) {
-    var cardsperType = cards.filter(function (el) {
+  function cardperType(allCards, type) {
+    return allCards.filter(function (el) {
       return el.type == type;
     });
-    return cardsperType;
   }
   const FlatListItemSeparator = () => {
     return (
@@ -285,4 +284,4 @@ const styles = StyleSheet.create({
     height: 20,
   },
 });
-export default creditCard;
+export default CreditCard;
