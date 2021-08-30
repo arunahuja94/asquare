@@ -14,7 +14,7 @@ import {
 } from 'react-native';
 import Share from 'react-native-share';
 import Icon from '../components/icons';
-import {FocusAwareStatusBar,globalToast} from '../constants/helper';
+import {FocusAwareStatusBar, globalToast} from '../constants/helper';
 import ReactNativeBlobUtil from 'react-native-blob-util';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {useFocusEffect} from '@react-navigation/native';
@@ -83,7 +83,7 @@ const importExport = ({navigation}) => {
             ifstream.onEnd(() => {
               const iv = data.substring(0, 32);
               data = data.substring(32, data.length);
-             // console.log(iv);
+              // console.log(iv);
               decryptData({data, iv}, key)
                 .then((text) => {
                   retrieveUserSession().then((sessionkey) => {
@@ -150,22 +150,21 @@ const importExport = ({navigation}) => {
   };
 
   const onShare = async (file1) => {
-      const shareOptions = {
-        title: 'Save file',
-        failOnCancel: false,
-        saveToFiles: true,
-        url : 'file://'+file1,
-      };
-      try {
-        const ShareResponse = await Share.open(shareOptions);
-        if (ShareResponse.dismissedAction) globalToast('Dismissed');
-        //console.log(ShareResponse);
-        //ReactNativeBlobUtil.fs.unlink(file1)
-      } catch (error) {
-        console.log('Error =>', error);
-        //setResult('error: '.concat(getErrorString(error)));
-      }
-  
+    const shareOptions = {
+      title: 'Save file',
+      failOnCancel: false,
+      saveToFiles: true,
+      url: 'file://' + file1,
+    };
+    try {
+      const ShareResponse = await Share.open(shareOptions);
+      if (ShareResponse.dismissedAction) globalToast('Dismissed');
+      //console.log(ShareResponse);
+      //ReactNativeBlobUtil.fs.unlink(file1)
+    } catch (error) {
+      console.log('Error =>', error);
+      //setResult('error: '.concat(getErrorString(error)));
+    }
   };
   const exportCSVFile = (headers, items, fileTitle) => {
     if (headers) {
@@ -182,7 +181,9 @@ const importExport = ({navigation}) => {
         'utf8',
       )
       .then(() => {
-        onShare(ReactNativeBlobUtil.fs.dirs.DocumentDir + '/' + exportedFilename)
+        onShare(
+          ReactNativeBlobUtil.fs.dirs.DocumentDir + '/' + exportedFilename,
+        );
         //globalToast('Csv File Downloaded Successfully');
         setExporting(false);
       });
@@ -208,19 +209,20 @@ const importExport = ({navigation}) => {
       });
       encryptData(JSON.stringify(backupData), key)
         .then(({cipher, iv}) => {
-          var backupFile = 'brfile_'+moment.utc().valueOf()+'.db';
-              ReactNativeBlobUtil.fs
-                .createFile(
-                  ReactNativeBlobUtil.fs.dirs.DocumentDir +'/'+backupFile,
-                  iv + '' + cipher,
-                  'utf8',
-                )
-                .then(() => {
-                  //console.log('iv',iv);
-                  onShare(ReactNativeBlobUtil.fs.dirs.DocumentDir +'/'+backupFile);
-                  //globalToast('Backup Created Successfully');
-                });
-            
+          var backupFile = 'brfile_' + moment.utc().valueOf() + '.db';
+          ReactNativeBlobUtil.fs
+            .createFile(
+              ReactNativeBlobUtil.fs.dirs.DocumentDir + '/' + backupFile,
+              iv + '' + cipher,
+              'utf8',
+            )
+            .then(() => {
+              //console.log('iv',iv);
+              onShare(
+                ReactNativeBlobUtil.fs.dirs.DocumentDir + '/' + backupFile,
+              );
+              //globalToast('Backup Created Successfully');
+            });
         })
         .catch((error) => {
           console.log(error);
@@ -235,7 +237,7 @@ const importExport = ({navigation}) => {
       .then((token) => {
         generateKey(token, ensalt, 5000, 256)
           .then((key) => {
-           // console.log(type);
+            // console.log(type);
             if (type == '2') {
               createFileUTF8Call(key);
             } else if (type == '1') {
@@ -243,24 +245,25 @@ const importExport = ({navigation}) => {
                 DocumentPicker.pick({
                   type: [DocumentPicker.types.allFiles],
                   copyTo: 'cachesDirectory',
-                }).then((res) => {
-                 // console.log(res);
-                  if (!res.name.endsWith(".db")) 
-                  {globalToast('Incorrect Backup File');}
-                  else if (res.fileCopyUri) {
-                    setRModalVisible(!rmodalVisible);
-                    setPickeduri(res.fileCopyUri);
-                  }
                 })
-                .catch ((err) => {
-                  if (DocumentPicker.isCancel(err)) {
-                    globalToast('No files Selected');
-                    console.log(err);
-                  } else {
-                    globalToast('No files Selected');
-                    throw err;
-                  }
-                });
+                  .then((res) => {
+                    // console.log(res);
+                    if (!res.name.endsWith('.db')) {
+                      globalToast('Incorrect Backup File');
+                    } else if (res.fileCopyUri) {
+                      setRModalVisible(!rmodalVisible);
+                      setPickeduri(res.fileCopyUri);
+                    }
+                  })
+                  .catch((err) => {
+                    if (DocumentPicker.isCancel(err)) {
+                      globalToast('No files Selected');
+                      console.log(err);
+                    } else {
+                      globalToast('No files Selected');
+                      throw err;
+                    }
+                  });
               } catch (err) {
                 console.log(err);
               }
@@ -325,7 +328,7 @@ const importExport = ({navigation}) => {
             </View>
             <View style={styles.modalBody}>
               <TextInput
-              keyboardType="numeric"
+                keyboardType="numeric"
                 placeholder="Master password"
                 placeholderTextColor="grey"
                 onChangeText={(text) => setRestorePassword(text)}

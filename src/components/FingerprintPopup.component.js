@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {
   ToastAndroid,
   Image,
@@ -16,40 +16,40 @@ import styles from './FingerprintPopup.component.styles';
 //   current (Android >= 23) biometric APIs
 // - your lib and implementation may not need both
 
-function FingerprintPopup(props)
-{
-  const [errorMessageLegacy,errorMessageLegacyUpdate] = React.useState(undefined);
+function FingerprintPopup(props) {
+  const [errorMessageLegacy, errorMessageLegacyUpdate] = React.useState(
+    undefined,
+  );
   const [biometricLegacy, biometricLegacyUpdate] = React.useState(undefined);
   const [description, descriptionUpdate] = React.useState('');
 
   useEffect(() => {
     function authCurrent() {
-      FingerprintScanner
-        .authenticate({ title : "Unlock asquare",description: props.description || 'Log in with Biometrics',cancelButton : "Use Password" })
+      FingerprintScanner.authenticate({
+        title: 'Unlock asquare',
+        description: props.description || 'Log in with Biometrics',
+        cancelButton: 'Use Password',
+      })
         .then(() => {
           props.onAuthenticate(true);
           console.log('fingerprint true');
-        }).catch((error) => {
-         if(error.name == 'UserCancel')
-         {
-          props.handlePopupDismissed();
-         }
-         else if(error.name="DeviceLocked")
-         {
-          ToastAndroid.showWithGravityAndOffset(
-            "Please try after 30sec",
-            ToastAndroid.SHORT,
-            ToastAndroid.BOTTOM,
-            25,
-            50
-          ); 
-          props.handlePopupDismissed();
-         }
-         else
-         {
-          console.log(error);
-         }
-          });
+        })
+        .catch((error) => {
+          if (error.name == 'UserCancel') {
+            props.handlePopupDismissed();
+          } else if ((error.name = 'DeviceLocked')) {
+            ToastAndroid.showWithGravityAndOffset(
+              'Please try after 30sec',
+              ToastAndroid.SHORT,
+              ToastAndroid.BOTTOM,
+              25,
+              50,
+            );
+            props.handlePopupDismissed();
+          } else {
+            console.log(error);
+          }
+        });
     }
 
     if (Platform.Version < 23) {
@@ -62,38 +62,29 @@ function FingerprintPopup(props)
     };
   });
 
-  if(Platform.Version < 23)
-  {
-  return (
-    <View style={styles.container}>
-      <View style={[styles.contentContainer, props.style]}>
+  if (Platform.Version < 23) {
+    return (
+      <View style={styles.container}>
+        <View style={[styles.contentContainer, props.style]}>
+          <Image
+            style={styles.logo}
+            source={require('../assets/img/finger_print.png')}
+          />
 
-        <Image
-          style={styles.logo}
-          source={require('../assets/img/finger_print.png')}
-        />
+          <Text style={styles.heading}>Biometric{'\n'}Authentication</Text>
+          <Text>Old Device</Text>
 
-        <Text style={styles.heading}>
-          Biometric{'\n'}Authentication
-        </Text>
-       <Text>Old Device</Text>
-
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={props.handlePopupDismissed}
-        >
-          <Text style={styles.buttonText}>
-            BACK TO MAIN
-          </Text>
-        </TouchableOpacity>
-
+          <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={props.handlePopupDismissed}>
+            <Text style={styles.buttonText}>BACK TO MAIN</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
+    );
   }
 
   return null;
-
 }
 
 export default FingerprintPopup;

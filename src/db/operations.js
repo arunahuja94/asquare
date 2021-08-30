@@ -121,7 +121,7 @@ export const getAllcardData = (key) => {
         ]);
         let Card = Array.from(allCards);
         //.slice(0, 5)
- 
+
         resolve(JSON.parse(JSON.stringify(Card)));
         realm.close();
       })
@@ -154,13 +154,12 @@ export const createDataNew = (item, passwordType, key) => {
             },
             true,
           );
- 
+
           // realm.close();
           resolve('DONE');
- 
+
           console.log('CREATE createDataNew data', data);
         });
- 
       })
       .catch((error) => {
         console.log('error', error);
@@ -367,16 +366,14 @@ export const deleteData = (id, key) => {
       encryptionKey: key,
     })
       .then((realm) => {
- 
         realm.write(() => {
- 
           const passwordSelect = realm
             .objects('Passwords')
             .filtered('id = ' + id);
-           realm.delete(passwordSelect);
+          realm.delete(passwordSelect);
           resolve('DONE');
         });
-       // realm.close();
+        // realm.close();
       })
       .catch((error) => {
         reject(error);

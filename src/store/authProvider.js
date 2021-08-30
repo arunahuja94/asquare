@@ -60,7 +60,7 @@ function AuthProvider(props) {
             globalToast(i18n.t('Signed_In'));
           }
         } catch (error) {
-            appConsoleLogs(error, 'error in store actions');
+          appConsoleLogs(error, 'error in store actions');
         }
       },
       signOut: () => {

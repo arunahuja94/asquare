@@ -1,11 +1,11 @@
 {
     "master_password": "Master Password",
     "confirm_master_password": "Confirm Master password",
-    "master_password_required":"Master Password is required",
-    "confirm_master_password_required":"Confirm Master Password is required",
-    "password_not_match":"Password doesn't match",
-    "master_password_created":"Master Password Created Successfully",
-    "master_password_incorrect":"Enter the correct Master password",
-    "Signed_Out":"Signed Out",
-    "Signed_In":"Signed In"
+    "master_password_required": "Master Password is required",
+    "confirm_master_password_required": "Confirm Master Password is required",
+    "password_not_match": "Password doesn't match",
+    "master_password_created": "Master Password Created Successfully",
+    "master_password_incorrect": "Enter the correct Master password",
+    "Signed_Out": "Signed Out",
+    "Signed_In": "Signed In"
 }

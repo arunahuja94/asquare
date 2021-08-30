@@ -17,7 +17,7 @@ import {FocusAwareStatusBar} from '../constants/helper';
 import {AuthContext} from '../store/authContext';
 import {Formik} from 'formik';
 function SignInScreen() {
-  const { authState, authActions } = useContext(AuthContext);
+  const {authState, authActions} = useContext(AuthContext);
   const [errorMessage, errorMessageUpdate] = React.useState(undefined);
   const [biometric, biometricUpdate] = React.useState(undefined);
   const [appState, appStateUpdate] = React.useState('');
@@ -92,11 +92,13 @@ function SignInScreen() {
           }}>
           <Formik
             initialValues={{password: ''}}
-            onSubmit={(values, actions) => authActions.signIn(values, actions, 'mp')}>
+            onSubmit={(values, actions) =>
+              authActions.signIn(values, actions, 'mp')
+            }>
             {({handleChange, handleBlur, handleSubmit, values}) => (
               <View>
                 <TextInput
-                keyboardType="numeric"
+                  keyboardType="numeric"
                   placeholder="Master password"
                   placeholderTextColor="#fff"
                   onChangeText={handleChange('password')}

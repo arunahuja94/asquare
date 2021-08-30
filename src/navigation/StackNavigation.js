@@ -1,14 +1,11 @@
 import React from 'react';
-import {
-    createStackNavigator,
-  } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import Detail from '../screens/Detail';
 import singleDetail from '../screens/singleDetail';
 import CreateEditForm from '../screens/CreateEditForm';
 import creditCard from '../screens/creditCard';
 import singleCardCat from '../screens/singleCardCat';
 import creditcardInput from '../screens/creditcardInput';
-
 
 const Stack = createStackNavigator();
 const passwordStackNavigator = () => {
@@ -94,4 +91,4 @@ const creditcardStackNavigator = () => {
   );
 };
 
-export {passwordStackNavigator,creditcardStackNavigator};
+export {passwordStackNavigator, creditcardStackNavigator};

@@ -27,13 +27,42 @@ const validationSchema = Yup.object().shape({
   name: Yup.string()
     .label('Name')
     .required()
-    .min(2, 'Must have at least 2 characters').test("name", "Invalid", value => value !== undefined && value.indexOf(',') < 0 ),
-  login: Yup.string().label('login').required('Username is a required field').test("login", "not valid", value => value !== undefined && value.indexOf(',') < 0 ),
+    .min(2, 'Must have at least 2 characters')
+    .test(
+      'name',
+      'Invalid',
+      (value) => value !== undefined && value.indexOf(',') < 0,
+    ),
+  login: Yup.string()
+    .label('login')
+    .required('Username is a required field')
+    .test(
+      'login',
+      'not valid',
+      (value) => value !== undefined && value.indexOf(',') < 0,
+    ),
   password: Yup.string()
     .label('Password')
-    .required('Password is a required field').test("login", "Invalid", value => value !== undefined && value.indexOf(',') < 0 ),
-    webAddress: Yup.string().label('web Address').test("login", "Invalid", value => value !== undefined && value.indexOf(',') < 0 ),
-    note: Yup.string().label('Note').test("login", "Invalid", value => value !== undefined && value.indexOf(',') < 0 ),
+    .required('Password is a required field')
+    .test(
+      'login',
+      'Invalid',
+      (value) => value !== undefined && value.indexOf(',') < 0,
+    ),
+  webAddress: Yup.string()
+    .label('web Address')
+    .test(
+      'login',
+      'Invalid',
+      (value) => value !== undefined && value.indexOf(',') < 0,
+    ),
+  note: Yup.string()
+    .label('Note')
+    .test(
+      'login',
+      'Invalid',
+      (value) => value !== undefined && value.indexOf(',') < 0,
+    ),
 });
 
 const CreateEditForm = (props) => {

@@ -14,10 +14,10 @@ function Home(props) {
     React.useCallback(() => {
       // Do something when the screen is focused
       getAllData()
-        .then(data => {
+        .then((data) => {
           SetPasswords(data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
       return () => {
@@ -29,10 +29,10 @@ function Home(props) {
   );
 
   //single Card Item
-  const SingleItem = item => {
+  const SingleItem = (item) => {
     return (
       <>
-            <Ripple
+        <Ripple
           rippleColor={'red'}
           onPress={() =>
             navigation.navigate('HelloForm', {
@@ -64,8 +64,7 @@ function Home(props) {
                     textAlign: 'right',
                     alignSelf: 'stretch',
                     color: 'gray',
-                  }}>
-                </Text>
+                  }}></Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -88,27 +87,25 @@ function Home(props) {
           <Text>No Passwords</Text>
         </Center>
       )}
-<TouchableOpacity
-   style={{
-       borderWidth:1,
-       borderColor:'rgba(0,0,0,0.2)',
-       alignItems:'center',
-       justifyContent:'center',
-       width:70,
-       position: 'absolute',                                          
-       bottom: 10,                                                    
-       right: 10,
-       height:70,
-       backgroundColor:'#fff',
-       borderRadius:100,
-     }}
-   onPress={() =>
+      <TouchableOpacity
+        style={{
+          borderWidth: 1,
+          borderColor: 'rgba(0,0,0,0.2)',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 70,
+          position: 'absolute',
+          bottom: 10,
+          right: 10,
+          height: 70,
+          backgroundColor: '#fff',
+          borderRadius: 100,
+        }}
+        onPress={() =>
           navigation.navigate('HelloForm', {item: 'No-Item', createFlag: 1})
-        }
- >
-   <Icon.Ionicons color="green" name="add-outline" size={30} />
-  </TouchableOpacity>
- 
+        }>
+        <Icon.Ionicons color="green" name="add-outline" size={30} />
+      </TouchableOpacity>
     </View>
   );
 }
