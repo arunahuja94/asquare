@@ -9,7 +9,7 @@ import Icon from '../components/icons';
 import {CardView} from 'react-native-credit-card-input-view';
 const windowWidth = Dimensions.get('window').width;
 import {FocusAwareStatusBar} from '../constants/helper';
-const singleCardCat = (props) => {
+const SingleCardCat = (props) => {
   const {navigation, route} = props;
   const RouteParams = route.params;
   const [text, setText] = useState('');
@@ -183,4 +183,4 @@ const styles = StyleSheet.create({
     paddingTop: 3,
   },
 });
-export default singleCardCat;
+export default SingleCardCat;

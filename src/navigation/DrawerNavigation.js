@@ -1,6 +1,6 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import importExport from '../screens/importExport';
+import ImportExport from '../screens/ImportExport';
 import {DrawerContent} from '../components/DrawerContent';
 import helpAbout from '../screens/helpAbout';
 import {
@@ -13,7 +13,7 @@ const DrawerScreen = () => (
   <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
     <Drawer.Screen name="password" component={passwordStackNavigator} />
     <Drawer.Screen name="cards" component={creditcardStackNavigator} />
-    <Drawer.Screen name="importExport" component={importExport} />
+    <Drawer.Screen name="ImportExport" component={ImportExport} />
     <Drawer.Screen name="helpAbout" component={helpAbout} />
   </Drawer.Navigator>
 );

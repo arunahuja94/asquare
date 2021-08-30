@@ -13,7 +13,7 @@ import {FocusAwareStatusBar} from '../constants/helper';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const singleDetail = (props) => {
+const SingleDetail = (props) => {
   const {navigation, route} = props;
   const RouteParams = route.params;
   const [text, setText] = useState('');
@@ -180,4 +180,4 @@ const styles = StyleSheet.create({
     paddingTop: 3,
   },
 });
-export default singleDetail;
+export default SingleDetail;

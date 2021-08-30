@@ -79,7 +79,7 @@ export function DrawerContent(props) {
                 </Text>
               )}
               onPress={() => {
-                props.navigation.navigate('importExport');
+                props.navigation.navigate('ImportExport');
               }}
             />
             <DrawerItem

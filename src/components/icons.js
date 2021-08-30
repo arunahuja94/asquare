@@ -32,7 +32,6 @@ const Fontisto = (props) => <FontistoI {...props} />;
 export default {
   MaterialCommunityIcons,
   SimpleLineIcons,
-  SimpleLineIcons,
   MaterialIcons,
   FontAwesome,
   Foundation,

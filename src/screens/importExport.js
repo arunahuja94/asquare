@@ -34,7 +34,7 @@ const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 import DocumentPicker from 'react-native-document-picker';
 
-const importExport = ({navigation}) => {
+const ImportExport = ({navigation}) => {
   const [allExportData, setallExportData] = useState({});
   const [restorePassword, setRestorePassword] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -722,4 +722,4 @@ const styles = StyleSheet.create({
     //marginTop:10
   },
 });
-export default importExport;
+export default ImportExport;
