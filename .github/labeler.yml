@@ -9,7 +9,7 @@ workflow: .github/workflows/*
 jest: jest/*
 
 frontend:
-  - any: ['src/**/*.js']
+  - 'src/**/*.js'
 
 root:
   - '*'
