@@ -3,6 +3,6 @@ module.exports = {
   extends: '@react-native-community',
   rules: {'prettier/prettier': ['error', {endOfLine: 'auto'}]},
   env: {
-    jest: true
+    jest: true,
   },
 };
