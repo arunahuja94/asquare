@@ -1,0 +1,15 @@
+critical:
+  - '(critical|urgent)'
+
+test:
+  - __test__/**/*
+
+workflow: .github/workflows/*
+
+jest: jest/*
+
+frontend:
+  - 'src/**/*.js'
+
+root:
+  - '*'
