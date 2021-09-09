@@ -56,6 +56,9 @@
     "setupFiles": [
       "<rootDir>/jest/setup.js"
     ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation)"
+    ],
     "moduleNameMapper": {
       ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "identity-obj-proxy"
     }
