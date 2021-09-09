@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler/jestSetup';
 import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
+jest.useFakeTimers();
 
 jest.mock('react-native-share', () => ({
   default: jest.fn(),
@@ -7,6 +8,10 @@ jest.mock('react-native-share', () => ({
 
 jest.mock('react-native-blob-util', () => ({
   default: jest.fn(),
+}));
+
+jest.mock('react-native-splash-screen', () => ({
+  hide: jest.fn(),
 }));
 
 jest.mock('react-native-encrypted-storage', () => ({
@@ -17,7 +22,9 @@ jest.mock('react-native-document-picker', () => ({default: jest.fn()}));
 
 jest.mock('@react-native-clipboard/clipboard', () => ({default: jest.fn()}));
 
-jest.mock('jail-monkey', () => ({default: jest.fn()}));
+jest.mock('jail-monkey', () => ({isJailBroken: jest.fn()}));
+
+jest.mock('realm', () => ({default: jest.fn()}));
 
 jest.mock('react-native-device-info', () => mockRNDeviceInfo);
 
